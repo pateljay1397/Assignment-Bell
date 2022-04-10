@@ -1,6 +1,6 @@
 import { mock } from "./mock";
 
-export const getComedies = () => {
+export const getMedias = () => {
   return new Promise((resolve, _) => {
     setTimeout(() => {
       resolve(mock);
