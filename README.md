@@ -1,8 +1,16 @@
-# Frontend developer challenge
+# Frontend Developer Challenge
 
-**_You may use any 3rd party packages_**
+Please clone the project. Once the challenge is complete, you may open a merge request.
+
+### Project set up
+
+> yarn install
+
+> yarn start
 
 ## Challenge overview
+
+**_You may use any 3rd party packages_**
 
 There is a mock api set up to facilitate this challenge.
 
@@ -22,18 +30,35 @@ The response will provide you with a data set of movies and shows. Specifically 
 
 ## Challenge
 
-1. Using the response from the mock api, your objective is to generate a responsive Grid interface
+1. Using the response from the mock api, your objective is to generate a Grid interface
 
-![Layout example](/public/assets/layout.png 'Layout')
+   ![Layout example](/public/assets/layout.png 'Layout')
 
-2. Each movie or show should allow the user to add or remove from their watchlist. (This will only update the local state)And the state will be reflected to the user in the UI.
+2. Each movie or show should allow the user to add or remove from it from their watchlist. The state will be reflected to the user in the UI. We can manage the watchlist entirely in local state for this excercise.
+   Adding and removing from watchlist will require you to make a request to the existing dummy methods provided.
+   The response, will determine if the media has been added and UI state should refelect the response.
 
-(+) Add to watchlist
+   A. **_ADD TO WATCHLIST_**: Clicking **_(+) Add to watchlist_** will add the item to the user watchlist in local state.
 
-(-) Remove from watchlist
+   ```
+      import { addToWatchlist } from "../api/";
+      addToWatchlist(id).then().catch()
 
-## Areas of interest.
+   ```
 
-1. State management strategy.
-2. Updates on local state should be done with Time and Space Complexity in mind.
-3. Component architecture.
+   Based on the response (This response is set up to fail 5% of the time, so we must handle success and failure scenarios)
+
+   1. Status 200 success, Update the state accordingly, add to watchlist.
+   2. Adding to watchlist should set the button to read **_(-) Remove from watchlist_**.
+   3. Status 422 error. The state must remain unchanged.
+
+   B. **_REMOVE FROM WATCHLIST_**: When the movie or show is in the users watchlist, the button will now read **_(-) Remove from watchlist_**
+
+   ```
+   import { removeFromWatchlist } from "../api/";
+   removeFromWatchlist(id).then().catch()
+
+   ```
+
+   1. Status 200 success, Update the state accordingly, remove from watchlist.
+   2. Removing from watchlist should return the button to **_(+) Add to watchlist_** state.
